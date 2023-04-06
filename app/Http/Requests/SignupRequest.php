@@ -7,7 +7,7 @@ use Illuminate\Validation\Rules\Password;
 
 class SignupRequest extends FormRequest
 {
-    
+
     public function authorize()
     {
         return true;
