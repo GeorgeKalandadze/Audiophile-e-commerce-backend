@@ -25,14 +25,21 @@ class SignupRequest extends FormRequest
                     ->letters()
                     ->symbols()
                     ->numbers()
-            ]
+            ],
+            'image' => [
+                'nullable',
+                'image',
+                'mimes:jpeg,png,jpg',
+                'max:2048', // maximum file size in kilobytes
+            ],
+
         ];
     }
 
     public function messages(){
         return [
             'name.required' => 'your name is required please enter name',
-            'password.required' => 'this is veri gleoba password',
+            'password.required' => 'your password is incorrect',
 
         ];
     }
