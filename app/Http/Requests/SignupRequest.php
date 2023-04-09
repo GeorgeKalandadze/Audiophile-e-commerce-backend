@@ -26,8 +26,8 @@ class SignupRequest extends FormRequest
                     ->symbols()
                     ->numbers()
             ],
-            'image' => [
-                'nullable',
+            'avatar_image' => [
+
                 'image',
                 'mimes:jpeg,png,jpg',
                 'max:2048', // maximum file size in kilobytes

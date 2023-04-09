@@ -20,6 +20,7 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'avatar_image' => $this->storeImage($request),
         ]);
 
         $token = $user->createToken('main')->plainTextToken;
@@ -47,5 +48,15 @@ class AuthController extends Controller
         $user = $request->user();
         $user->currentAccessToken()->delete();
         return response('', 204);
+    }
+
+    private function storeImage($request)
+    {
+
+
+        $newImageName = uniqid() . '-' . time() . '.' .
+        $request->avatar_image->extension();
+
+        return $request->avatar_image->move(public_path('avatar_images'), $newImageName);
     }
 }
