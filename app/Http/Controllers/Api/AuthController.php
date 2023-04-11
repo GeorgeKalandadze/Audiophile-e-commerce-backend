@@ -27,6 +27,15 @@ class AuthController extends Controller
         return response(compact('user', 'token'));
     }
 
+    public function index(Request $request)
+    {
+        $user = $request->user();
+        return response()->json([
+            'name' => $user->name,
+            'avatar_image' => asset('avatar_images/' . $user->avatar_image),
+        ]);
+    }
+
     public function login(LoginRequest $request)
     {
         $credentials = $request->validated();
@@ -52,11 +61,11 @@ class AuthController extends Controller
 
     private function storeImage($request)
     {
+        $newImageName = uniqid() . '-' . time() . '.' . $request->avatar_image->extension();
+        $request->avatar_image->move(public_path('avatar_images'), $newImageName);
+        return $newImageName;
 
-
-        $newImageName = uniqid() . '-' . time() . '.' .
-        $request->avatar_image->extension();
-
-        return $request->avatar_image->move(public_path('avatar_images'), $newImageName);
     }
+
+
 }

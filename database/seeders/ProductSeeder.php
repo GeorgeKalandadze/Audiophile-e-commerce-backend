@@ -5,14 +5,14 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+    
     public function run(): void
     {
+
         Db::table('products')->insert([
             [
                 "slug" => "yx1-earphones",
@@ -32,7 +32,9 @@ class ProductSeeder extends Seeder
                                with the charging case, giving you uninterrupted play time. Exquisite craftsmanship
                                with a splash resistant design now available in an all new white and grey color
                                scheme as well as the popular classic black.",
-                "new" => boolval(1)
+                "new" => boolval(1),
+
+
             ],
 
             [
@@ -52,7 +54,8 @@ class ProductSeeder extends Seeder
                                to easy-access touch buttons on the earcups. Regardless of how you use the XX59 headphones,
                                you can do so all day thanks to an impressive 30-hour battery life that can be rapidly
                                recharged via USB-C.",
-                "new" => boolval(0)
+                "new" => boolval(0),
+
             ],
 
             [

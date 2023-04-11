@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Category::class,'category_id');
             $table->string('slug');
             $table->text('description');
+            $table->string('cart_image')->nullable();
             $table->text('features');
             $table->boolean('new');
             $table->decimal('price');
