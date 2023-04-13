@@ -32,7 +32,7 @@ class ProductSeeder extends Seeder
                                with the charging case, giving you uninterrupted play time. Exquisite craftsmanship
                                with a splash resistant design now available in an all new white and grey color
                                scheme as well as the popular classic black.",
-                "new" => boolval(1),
+                "new" => true,
                 "cart_image" => 'cart_images/image-yx1-earphones.jpg'
 
             ],
@@ -54,7 +54,7 @@ class ProductSeeder extends Seeder
                                to easy-access touch buttons on the earcups. Regardless of how you use the XX59 headphones,
                                you can do so all day thanks to an impressive 30-hour battery life that can be rapidly
                                recharged via USB-C.",
-                "new" => boolval(0),
+                "new" => false,
                 "cart_image" => 'cart_images/image-xx59-headphones.jpg'
 
             ],
@@ -75,7 +75,7 @@ class ProductSeeder extends Seeder
                                Its closed-back design delivers up to 27 dB of passive noise cancellation, reducing resonance by
                                reflecting sound to a dedicated absorber. For connectivity, a specially tuned cable is includes with
                                a balanced gold connector.",
-                "new" => boolval(0),
+                "new" => false,
                 "cart_image" => 'cart_images/image-xx99-mark-one-headphones.jpg'
             ],
 
@@ -93,7 +93,7 @@ class ProductSeeder extends Seeder
                                you to experience your audio world on your terms. It lets you enjoy your audio in peace, but quickly interact
                                with your surroundings when you need to. Combined with Bluetooth 5. 0 compliant connectivity and 17 hour battery
                                life, the XX99 Mark II headphones gives you superior sound, cutting-edge technology, and a modern design aesthetic.",
-                "new" => boolval(1),
+                "new" => true,
                 "cart_image" => 'cart_images/image-xx99-mark-two-headphones.jpg'
             ],
 
@@ -111,7 +111,7 @@ class ProductSeeder extends Seeder
                                acoustic resonance. Dual connectivity allows pairing through bluetooth or traditional optical and RCA input.
                                Switch input sources and control volume at your finger tips with the included wireless remote. This versatile speaker
                                is equipped to deliver an authentic listening experience.",
-                "new" => boolval(0),
+                "new" => false,
                 "cart_image" => 'cart_images/image-zx7-speaker.jpg'
             ],
 
@@ -128,7 +128,7 @@ class ProductSeeder extends Seeder
                                competition with ZX9’s signature planar diaphragm tweeter. Equally important is its powerful room-shaking bass courtesy of a 6.5”
                                aluminum alloy bass unit. You’ll be able to enjoy equal sound quality whether in a large room or small den. Furthermore, you will
                                experience new sensations from old songs since it can respond to even the subtle waveforms.",
-                "new" => boolval(1),
+                "new" => true,
                 "cart_image" => 'cart_images/image-zx9-speaker.jpg'
 
             ],

@@ -20,4 +20,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductInclude::class);
     }
+
+    public function productImages(): HasMany
+    {
+        return $this->hasMany(ProductImage::class);
+    }
 }
