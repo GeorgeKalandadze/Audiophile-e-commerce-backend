@@ -25,3 +25,4 @@ Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/products',[ProductsController::class,'index']);
+Route::get('/images',[\App\Http\Controllers\ProductImageController::class,'index']);
