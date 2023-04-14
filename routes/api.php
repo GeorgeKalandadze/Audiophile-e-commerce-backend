@@ -19,10 +19,11 @@ use \App\Http\Controllers\Api\AuthController;
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user',[AuthController::class,'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/products',[ProductsController::class,'index']);
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/products',[ProductsController::class,'index']);
-Route::get('/images',[\App\Http\Controllers\ProductImageController::class,'index']);
+
+
