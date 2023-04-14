@@ -18,25 +18,21 @@ class ProductImageSeeder extends Seeder
     public function run()
     {
         $products = Product::all();
-        $folderPaths = [];
-//        for($i = 0; $i < count($products); $i++){
-//            $folderPath = "product_images/product-{$products[$i]['slug']}";
-//            if (is_dir($folderPath)) {
-
-                for ($j = 0; $j < count($products); $j++) {
-                    for ($i = 1; $i < 4; $i++){
-                        $newPath = "product_images/product-{$products[$j]['slug']}/image-gallery-{$i}.jpg";
-                        DB::table('product_images')->insert([
-                            'product_id' => $products[$j]['id'],
-                            'path' => $newPath,
-                        ]);
+            $publicPath = public_path("product_images/");
+                for ($i = 0; $i < count($products); $i++) {
+                    $folderPath = "{$publicPath}product-{$products[$i]['slug']}";
+                    $files = array_diff(scandir($folderPath), array('.', '..'));
+                        for ($j = 2; $j < count(scandir($folderPath)); $j++){
+                            $pathInfo = pathinfo($files[$j]);
+                            $filename = $pathInfo['filename'];
+                            $extension = $pathInfo['extension'];
+                            $newPath = "product_images/product-{$products[$i]['slug']}/{$filename}.{$extension}";
+                            DB::table('product_images')->insert([
+                                'product_id' => $products[$i]['id'],
+                                'path' => $newPath,
+                            ]);
                     }
 
-
-
-//                }
-//
-//            }
         }
 
     }
