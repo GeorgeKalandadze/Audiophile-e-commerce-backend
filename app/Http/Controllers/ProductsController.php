@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,7 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::with('category','productInclude','productImages')->get();
-
-        return response()->json($products);
+        return ProductResource::collection($products);
+//        return response()->json($products);
     }
 }
