@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ProductsController;
+use \App\Http\Controllers\CartController;
 use \App\Http\Controllers\Api\AuthController;
 
 /*
@@ -20,6 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user',[AuthController::class,'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/products',[ProductsController::class,'index']);
+    Route::post('/cart/add', [CartController::class,'add']);
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);
