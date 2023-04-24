@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Models\CartItem;
 use App\Models\Product;
 
@@ -45,4 +43,44 @@ class CartController extends Controller
             }
         }
     }
+
+
+    public function updateQuantity($cart_id, $scope, Request $request)
+    {
+        $user = $request->user();
+        if($user){
+            $user_id = $user->id;
+            $cartItem = CartItem::where('id',$cart_id)->where('user_id',$user_id)->first();
+            if($cartItem){
+                if($scope == "inc"){
+                    $cartItem->quantity += 1;
+                }else if($scope == "dec"){
+                    $cartItem->quantity -= 1;
+                }
+                $cartItem->update();
+                return response()->json([
+                    'status' => 201,
+                    'message' => 'quantity updated'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'cart item not found'
+                ]);
+            }
+        }
+    }
+
+    public function getCarts(Request $request)
+    {
+        $user = $request->user();
+        if($user){
+            $user_id = $user->id;
+            $cartItems = CartItem::with('product')
+                ->where('user_id', $user_id)
+                ->get();
+            return response()->json($cartItems);
+        }
+    }
+
 }
