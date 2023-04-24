@@ -22,8 +22,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/products',[ProductsController::class,'index']);
     Route::post('/cart/add', [CartController::class,'add']);
-    Route::put('/cart/update-quantity/{cart_id}/{scope}', [CartController::class,'updateQuantity']);
     Route::get('/cart/get-carts', [CartController::class,'getCarts']);
+    Route::put('/cart/update-quantity/{cart_id}/{scope}', [CartController::class,'updateQuantity']);
+
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Resources\CartItemResource;
 use Illuminate\Http\Request;
 use App\Models\CartItem;
 use App\Models\Product;
@@ -79,7 +80,7 @@ class CartController extends Controller
             $cartItems = CartItem::with('product')
                 ->where('user_id', $user_id)
                 ->get();
-            return response()->json($cartItems);
+            return CartItemResource::collection($cartItems);
         }
     }
 
