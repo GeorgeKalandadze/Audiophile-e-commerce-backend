@@ -100,4 +100,15 @@ class CartController extends Controller
         }
     }
 
+    public function deleteAllCartItem(Request $request)
+    {
+        $user = $request->user();
+        if ($user) {
+            CartItem::where('user_id', $user->id)->delete();
+            return response()->json([
+                'status' => 200,
+                'message' => 'Cart cleared'
+            ]);
+        }
+    }
 }
