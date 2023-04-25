@@ -56,7 +56,22 @@ class CartController extends Controller
                 if($scope == "inc"){
                     $cartItem->quantity += 1;
                 }else if($scope == "dec"){
-                    $cartItem->quantity -= 1;
+                    if($cartItem->quantity > 0) {
+                        $cartItem->quantity -= 1;
+                        if($cartItem->quantity == 0) {
+                            $cartItem->delete();
+                            return response()->json([
+                                'status' => 200,
+                                'message' => 'cart item deleted'
+                            ]);
+                        }
+                    }
+                    else {
+                        return response()->json([
+                            'status' => 400,
+                            'message' => 'quantity cannot be decreased below zero'
+                        ]);
+                    }
                 }
                 $cartItem->update();
                 return response()->json([
@@ -71,6 +86,7 @@ class CartController extends Controller
             }
         }
     }
+
 
     public function getCarts(Request $request)
     {
