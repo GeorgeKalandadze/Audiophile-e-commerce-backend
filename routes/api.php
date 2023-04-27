@@ -21,10 +21,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user',[AuthController::class,'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/products',[ProductsController::class,'index']);
-    Route::post('/cart/add', [CartController::class,'add']);
-    Route::get('/cart/get-carts', [CartController::class,'getCarts']);
-    Route::put('/cart/update-quantity/{cart_id}/{scope}', [CartController::class,'updateQuantity']);
-    Route::delete('/cart/delete-cart', [CartController::class,'deleteAllCartItem']);
+    Route::prefix('cart')->group(function () {
+        Route::post('/add', [CartController::class,'add']);
+        Route::get('/get-carts', [CartController::class,'getCarts']);
+        Route::put('/update-quantity/{cart_id}/{scope}', [CartController::class,'updateQuantity']);
+        Route::delete('/delete-cart', [CartController::class,'deleteAllCartItem']);
+    });
 
 });
 
