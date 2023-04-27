@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ProductsController;
 use \App\Http\Controllers\CartController;
 use \App\Http\Controllers\Api\AuthController;
+use \App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/update-quantity/{cart_id}/{scope}', [CartController::class,'updateQuantity']);
         Route::delete('/delete-cart', [CartController::class,'deleteAllCartItem']);
     });
+    Route::post('/checkout', [CheckoutController::class, 'checkout']);
 
 });
 
