@@ -6,7 +6,7 @@ use \App\Http\Controllers\ProductsController;
 use \App\Http\Controllers\CartController;
 use \App\Http\Controllers\Api\AuthController;
 use \App\Http\Controllers\CheckoutController;
-
+use \App\Http\Controllers\CustomerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/delete-cart', [CartController::class,'deleteAllCartItem']);
     });
     Route::post('/checkout', [CheckoutController::class, 'checkout']);
+    Route::post('/customers', [CustomerController::class, 'store']);
 
 });
 
