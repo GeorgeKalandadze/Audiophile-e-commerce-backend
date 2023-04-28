@@ -45,8 +45,6 @@ class CheckoutController extends Controller
             $orderItem['order_id'] = $order->id;
             OrderItem::create($orderItem);
         }
-
-        CartItem::where(['user_id' => $user->id])->delete();
     }
 
 
