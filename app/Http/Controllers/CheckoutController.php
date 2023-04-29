@@ -33,17 +33,32 @@ class CheckoutController extends Controller
             ];
         }
 
-        $orderData = [
-            'total_price' => $totalPrice,
-            'created_by' => $user->id,
-            'updated_by' => $user->id,
-        ];
-        $order = Order::create($orderData);
+        // Check if the user already has an order
+        $existingOrder = Order::where('created_by', $user->id)->first();
 
-        // Create Order Items
-        foreach ($orderItems as $orderItem) {
-            $orderItem['order_id'] = $order->id;
-            OrderItem::create($orderItem);
+        if ($existingOrder) {
+            // Add order items to the existing order
+            foreach ($orderItems as $orderItem) {
+                $orderItem['order_id'] = $existingOrder->id;
+                OrderItem::create($orderItem);
+            }
+            // Update the existing order's total price
+            $existingOrder->total_price += $totalPrice;
+            $existingOrder->save();
+        } else {
+            // Create a new order for the user
+            $orderData = [
+                'total_price' => $totalPrice,
+                'created_by' => $user->id,
+                'updated_by' => $user->id,
+            ];
+            $order = Order::create($orderData);
+
+            // Create Order Items for the new order
+            foreach ($orderItems as $orderItem) {
+                $orderItem['order_id'] = $order->id;
+                OrderItem::create($orderItem);
+            }
         }
     }
 

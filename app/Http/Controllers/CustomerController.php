@@ -15,7 +15,7 @@ class CustomerController extends Controller
         $customer = Customer::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
-            'phone_number' => $validatedData['phone_number'],
+            'phone' => $validatedData['phone'],
             'address' => $validatedData['address'],
             'zip_code' => $validatedData['zip_code'],
             'city' => $validatedData['city'],

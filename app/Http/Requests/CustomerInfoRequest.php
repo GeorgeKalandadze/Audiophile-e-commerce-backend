@@ -27,7 +27,7 @@ class CustomerInfoRequest extends FormRequest
         return [
             'name' => [ 'required', Rule::in([$authorizedUser->name])],
             'email' => ['required', Rule::in([$authorizedUser->email])],
-            'phone_number' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'zip_code' => 'required|string|max:255',
             'city' => 'required|string|max:255',
