@@ -7,7 +7,7 @@ use \App\Http\Controllers\CartController;
 use \App\Http\Controllers\Api\AuthController;
 use \App\Http\Controllers\CheckoutController;
 use \App\Http\Controllers\CustomerController;
-use \App\Http\Controllers\Auth\RegisteredUserController;
+use \App\Http\Controllers\OrderItemController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,12 +31,13 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::post('/checkout', [CheckoutController::class, 'checkout']);
     Route::post('/customers', [CustomerController::class, 'store']);
+    Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'index']);
 
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [RegisteredUserController::class, 'store']);
+
 
 
 
