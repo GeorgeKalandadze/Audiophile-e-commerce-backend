@@ -45,7 +45,6 @@ class CartController extends Controller
         }
     }
 
-
     public function updateQuantity($cart_id, $scope, Request $request)
     {
         $user = $request->user();
