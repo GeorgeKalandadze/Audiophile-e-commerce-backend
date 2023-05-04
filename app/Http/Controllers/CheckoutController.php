@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderStatus;
 use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -49,6 +50,7 @@ class CheckoutController extends Controller
             // Create a new order for the user
             $orderData = [
                 'total_price' => $totalPrice,
+                'status' => OrderStatus::Unpaid,
                 'created_by' => $user->id,
                 'updated_by' => $user->id,
             ];

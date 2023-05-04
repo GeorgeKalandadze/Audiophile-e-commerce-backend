@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderStatus;
 use App\Http\Requests\CustomerInfoRequest;
 use App\Models\Customer;
+use App\Models\Order;
 
 
 class CustomerController extends Controller
@@ -24,7 +26,12 @@ class CustomerController extends Controller
             'e_money_pin' => $validatedData['e_money_pin'],
             'payment_details' => $validatedData['payment_details'],
         ]);
-
+        $user = $request->user();
+        $order = Order::where('created_by', $user->id)->first();
+        if($order){
+            $order->status = OrderStatus::Completed;
+            $order->save();
+        }
         return response()->json([
             'success' => true,
             'customer' => $customer,
