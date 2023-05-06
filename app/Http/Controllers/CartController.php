@@ -19,10 +19,11 @@ class CartController extends Controller
 
             if ($productCheck) {
                 if (CartItem::where('product_id', $product_id)->where('user_id', $user->id)->exists()) {
+                    // Debug Statement 1
+
                     return response()->json([
-                        'status' => 409,
                         'message' => 'Already added to cart'
-                    ]);
+                    ],409);
                 } else {
                     $data = [
                         'user_id' => $request->user()->id,
@@ -32,15 +33,16 @@ class CartController extends Controller
                     CartItem::create($data);
                 }
 
+
+
                 return response()->json([
-                    'status' => 201,
                     'message' => 'Added to cart'
-                ]);
+                ],201);
             } else {
+
                 return response()->json([
-                    'status' => 404,
                     'message' => 'Product not found'
-                ]);
+                ],404);
             }
         }
     }
