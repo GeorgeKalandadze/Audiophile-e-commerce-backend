@@ -32,9 +32,6 @@ class CartController extends Controller
                     ];
                     CartItem::create($data);
                 }
-
-
-
                 return response()->json([
                     'message' => 'Added to cart'
                 ],201);

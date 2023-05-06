@@ -35,7 +35,9 @@ class CheckoutController extends Controller
         }
 
         // Check if the user already has an order
-        $existingOrder = Order::where('created_by', $user->id)->first();
+        $existingOrder = Order::where('created_by', $user->id)
+
+            ->first();
 
         if ($existingOrder) {
             // Add order items to the existing order

@@ -34,7 +34,7 @@ class CustomerInfoRequest extends FormRequest
             'country' => 'required|string|max:255',
             'e_money_number' => 'required|string|max:255',
             'e_money_pin' => 'required|string|max:255',
-            'payment_details' => [ 'string', Rule::in(['e-Money', 'e-Money PIN'])]
+            'payment_details' => ['nullable' ,'string', Rule::in(['e-Money', 'e-Money PIN'])]
         ];
     }
 }

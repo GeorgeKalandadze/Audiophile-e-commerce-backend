@@ -24,8 +24,9 @@ class CustomerController extends Controller
             'country' => $validatedData['country'],
             'e_money_number' => $validatedData['e_money_number'],
             'e_money_pin' => $validatedData['e_money_pin'],
-            'payment_details' => $validatedData['payment_details'],
+            'payment_details' => $validatedData['payment_details']?? null,
         ]);
+
         $user = $request->user();
         $order = Order::where('created_by', $user->id)->first();
         if($order){
