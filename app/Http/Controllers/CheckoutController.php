@@ -15,7 +15,6 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
-
         $user = $request->user();
 
         [$products, $cartItems] = self::getProductsAndCartItems();
@@ -34,22 +33,13 @@ class CheckoutController extends Controller
             ];
         }
 
-        // Check if the user already has an order
+        // Check if the user already has an order with a status of "Completed"
         $existingOrder = Order::where('created_by', $user->id)
-
+            ->where('status', OrderStatus::Completed)
             ->first();
 
         if ($existingOrder) {
-            // Add order items to the existing order
-            foreach ($orderItems as $orderItem) {
-                $orderItem['order_id'] = $existingOrder->id;
-                OrderItem::create($orderItem);
-            }
-            // Update the existing order's total price
-            $existingOrder->total_price += $totalPrice;
-            $existingOrder->save();
-        } else {
-            // Create a new order for the user
+            // The user already has a completed order, create a new order
             $orderData = [
                 'total_price' => $totalPrice,
                 'status' => OrderStatus::Unpaid,
@@ -62,6 +52,34 @@ class CheckoutController extends Controller
             foreach ($orderItems as $orderItem) {
                 $orderItem['order_id'] = $order->id;
                 OrderItem::create($orderItem);
+            }
+        } else {
+            // Check if the user already has an order with a status of "Unpaid"
+            $existingOrder = Order::where('created_by', $user->id)
+                ->where('status', OrderStatus::Unpaid)
+                ->first();
+
+            if ($existingOrder) {
+                // Add order items to the existing "Unpaid" order
+                foreach ($orderItems as $orderItem) {
+                    $orderItem['order_id'] = $existingOrder->id;
+                    OrderItem::create($orderItem);
+                }
+            } else {
+                // Create a new order for the user
+                $orderData = [
+                    'total_price' => $totalPrice,
+                    'status' => OrderStatus::Unpaid,
+                    'created_by' => $user->id,
+                    'updated_by' => $user->id,
+                ];
+                $order = Order::create($orderData);
+
+                // Create Order Items for the new order
+                foreach ($orderItems as $orderItem) {
+                    $orderItem['order_id'] = $order->id;
+                    OrderItem::create($orderItem);
+                }
             }
         }
 

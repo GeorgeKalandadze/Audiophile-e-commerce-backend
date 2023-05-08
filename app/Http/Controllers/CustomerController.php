@@ -28,7 +28,9 @@ class CustomerController extends Controller
         ]);
 
         $user = $request->user();
-        $order = Order::where('created_by', $user->id)->first();
+        $order = Order::where('created_by', $user->id)
+            ->where('status', OrderStatus::Unpaid)
+            ->first();
         if($order){
             $order->status = OrderStatus::Completed;
             $order->save();

@@ -19,8 +19,6 @@ class CartController extends Controller
 
             if ($productCheck) {
                 if (CartItem::where('product_id', $product_id)->where('user_id', $user->id)->exists()) {
-                    // Debug Statement 1
-
                     return response()->json([
                         'message' => 'Already added to cart'
                     ],409);
