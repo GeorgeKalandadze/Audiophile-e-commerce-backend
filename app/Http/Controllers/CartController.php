@@ -31,8 +31,12 @@ class CartController extends Controller
                         'quantity' => $quantity,
                     ];
                     CartItem::create($data);
+                    $cartItems = CartItem::with('product')
+                        ->where('user_id', $user->id)
+                        ->get();
                 }
                 return response()->json([
+                    'data' => CartItemResource::collection($cartItems),
                     'message' => 'Added to cart'
                 ],201);
             } else {
@@ -59,9 +63,9 @@ class CartController extends Controller
                         if($cartItem->quantity == 0) {
                             $cartItem->delete();
                             return response()->json([
-                                'status' => 200,
+
                                 'message' => 'cart item deleted'
-                            ]);
+                            ],201);
                         }
                     }
                     else {
@@ -72,10 +76,13 @@ class CartController extends Controller
                     }
                 }
                 $cartItem->update();
+                $cartItems = CartItem::with('product')
+                    ->where('user_id', $user->id)
+                    ->get();
                 return response()->json([
-                    'status' => 201,
+                    'data' => $cartItems,
                     'message' => 'quantity updated'
-                ]);
+                ],201);
             } else {
                 return response()->json([
                     'status' => 404,
