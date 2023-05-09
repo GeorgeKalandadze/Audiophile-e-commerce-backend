@@ -84,6 +84,11 @@ class CheckoutController extends Controller
         }
 
         CartItem::where(['user_id' => $user->id])->delete();
+        
+        return Order::with('items', 'items.product')
+            ->where('created_by', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->first();
     }
 
 
